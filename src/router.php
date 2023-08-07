@@ -13,7 +13,7 @@ class router
 
 	public function getRoutes(): array {
 		return [
-			new route( 'GET', config::getEnvironmentConfig()->getBasePath() . '/user', '\gcgov\framework\services\usercrud\\user', 'getAll', true, [ 'User.Read' ] ),
+			new route( 'GET', config::getEnvironmentConfig()->getBasePath() . '/user', 'gcgov\framework\services\usercrud\controllers\user', 'getAll', true, [ 'User.Read' ] ),
 			new route( 'GET', config::getEnvironmentConfig()->getBasePath() . '/user/{_id}', '\gcgov\framework\services\usercrud\controllers\user', 'getOne', true, [ 'User.Read' ] ),
 			new route( 'POST', config::getEnvironmentConfig()->getBasePath() . '/user/{_id}', '\gcgov\framework\services\usercrud\controllers\user', 'save', true, [ 'User.Read', 'User.Write' ] ),
 			new route( 'DELETE', config::getEnvironmentConfig()->getBasePath() . '/user/{_id}', '\gcgov\framework\services\usercrud\controllers\user', 'delete', true, [ 'User.Read', 'User.Write' ] )
