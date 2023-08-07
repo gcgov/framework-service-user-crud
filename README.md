@@ -33,7 +33,7 @@
 
 ## Installation:
 
-* Require using Composer https://packagist.org/packages/gcgov/framework-service-auth-oauth-server
-* Add namespace `\gcgov\framework\services\authoauth` to `\app\app->registerFrameworkServiceNamespaces()`
+* Require using Composer https://packagist.org/packages/gcgov/framework-service-user-crud
+* Add namespace `\gcgov\framework\services\usercrud` to `\app\app->registerFrameworkServiceNamespaces()`
 
 ## Implementation
