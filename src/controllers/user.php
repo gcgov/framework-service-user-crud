@@ -1,10 +1,10 @@
 <?php
-namespace gcgov\framework\services\authoauth\controllers;
+namespace gcgov\framework\services\usercrud\controllers;
 
-use gcgov\framework\exceptions\modelException;
-use gcgov\framework\models\controllerDataResponse;
 use gcgov\framework\exceptions\controllerException;
+use gcgov\framework\exceptions\modelException;
 use gcgov\framework\interfaces\controller;
+use gcgov\framework\models\controllerDataResponse;
 use gcgov\framework\models\controllerPagedDataResponse;
 use gcgov\framework\services\request;
 

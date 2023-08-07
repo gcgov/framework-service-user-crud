@@ -1,18 +1,14 @@
 {
-	"name": "gcgov/framework-service-auth-oauth-server",
+	"name": "gcgov/framework-service-user-crud",
 	"type": "framework-service",
-	"description": "Plugin enables a full fledged oauth server generating access and refresh tokens. Authentication can be provided as username/password or via third party Oauth providers.",
+	"description": "Implement standard CRUD routes to manage the user collection. Even if your app doesn't provide a custom user model (`\\app\\models\\user`), your auth or database service may provide you with a standard user model that implements (`\\gcgov\\framework\\interfaces\\auth\\user`).",
 	"license": "MIT",
 	"autoload": {
 		"psr-4": {
-			"gcgov\\framework\\services\\authoauth\\": "src/"
+			"gcgov\\framework\\services\\usercrud\\": "src/"
 		}
 	},
 	"require": {
-		"php": ">=8.1",
-		"hybridauth/hybridauth": "^3.10",
-		"lcobucci/jwt": "^4.0",
-		"lcobucci/clock": "^2.0",
-		"andrewsauder/json-deserialize": "^2.4.2"
+		"php": ">=8.1"
 	}
 }
