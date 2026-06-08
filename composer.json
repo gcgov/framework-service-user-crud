@@ -8,6 +8,15 @@
 			"gcgov\\framework\\services\\usercrud\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"app\\models\\": "tests/Stubs/app/models/",
+			"gcgov\\framework\\services\\usercrud\\tests\\": "tests/"
+		},
+		"files": [
+			"tests/Stubs/FakeUserModel.php"
+		]
+	},
 	"require": {
 		"php": ">=8.1"
 	},
