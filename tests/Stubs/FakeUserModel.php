@@ -10,7 +10,7 @@ namespace app\models;
  * which returns \app\models\user when it exists. Each test populates the
  * static $records array to drive the controller's behaviour.
  */
-class user {
+class user implements \gcgov\framework\interfaces\auth\user {
 
 	/** @var array<string, self> */
 	public static array $records = [];
@@ -23,6 +23,10 @@ class user {
 
 	public string $_id = '';
 	public string $name = '';
+	public string $email = '';
+	public string $username = '';
+	/** @var string[] */
+	public array $roles = [];
 
 	public static function reset(): void {
 		self::$records = [];
@@ -46,18 +50,22 @@ class user {
 		return $result;
 	}
 
-	public static function getOne( string $_id ): self {
+	public static function getOne( \MongoDB\BSON\ObjectId|string|int $_id ): self {
 		self::throwIfQueued();
-		if ( !isset( self::$records[ $_id ] ) ) {
+		$key = (string) $_id;
+		if ( !isset( self::$records[ $key ] ) ) {
 			throw new \gcgov\framework\exceptions\modelException( 'not found', 404 );
 		}
-		return self::$records[ $_id ];
+		return self::$records[ $key ];
 	}
 
-	public static function save( self $user ): self {
+	public static function save( object &$object ): mixed {
 		self::throwIfQueued();
-		self::$records[ $user->_id ] = $user;
-		return $user;
+		if ( !( $object instanceof self ) ) {
+			throw new \InvalidArgumentException( 'Expected ' . self::class );
+		}
+		self::$records[ $object->_id ] = $object;
+		return $object;
 	}
 
 	public static function delete( string $_id ): FakeDeleteResult {
@@ -84,6 +92,22 @@ class user {
 			throw $e;
 		}
 	}
+
+	public function getId(): string|int|\MongoDB\BSON\ObjectId { return $this->_id; }
+	public function getName(): string { return $this->name; }
+	public function getUsername(): string { return $this->username; }
+	public function getPassword(): string { return ''; }
+	public function getOauthId(): string { return ''; }
+	public function getOauthProvider(): string { return ''; }
+	public function getEmail(): string { return $this->email; }
+	public function getRoles(): array { return $this->roles; }
+	public function getActive(): bool { return true; }
+	public function getMfaRequired(): bool { return false; }
+	public function getMfaConfigured(): bool { return false; }
+	public static function getFromOauth( string $email, string $externalId, string $externalProvider, ?string $firstName = '', ?string $lastName = '', bool $addIfNotExisting = false, array $rolesForNewUser=[] ): self { throw new \BadMethodCallException(); }
+	public static function verifyUsernamePassword( string $username, string $password ): self { throw new \BadMethodCallException(); }
+	public static function getOneByExternalId( string $externalId ): self { throw new \BadMethodCallException(); }
+	public static function getOneByEmail( string $email ): self { throw new \BadMethodCallException(); }
 
 }
 
